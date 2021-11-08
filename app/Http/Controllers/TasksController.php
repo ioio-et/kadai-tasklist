@@ -46,13 +46,16 @@ class TasksController extends Controller
      */
     public function create()
     {
-        
-        
+        if (\Auth::check()) {
         $task = new Task;
 
         return view('tasks.create', [
             'task' => $task,
         ]);
+        }else{
+            return redirect('/');
+        }
+        
     }
 
     /**
@@ -91,11 +94,15 @@ class TasksController extends Controller
      */
     public function show($id)
     {
+        if (\Auth::check()) {
         $task = Task::findOrFail($id);
 
         return view('tasks.show', [
             'task' => $task,
         ]);
+        }else{
+            return redirect('/');
+        }
     }
 
     /**
@@ -106,11 +113,16 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
+        if (\Auth::check()) {
         $task = Task::findOrFail($id);
 
         return view('tasks.edit', [
             'task' => $task,
         ]);
+        }else{
+            return redirect('/');
+        }
+        
     }
 
     /**
@@ -129,11 +141,16 @@ class TasksController extends Controller
             ]);
             
         $task = Task::findOrFail($id);
+        
         // メッセージを更新
-        $task->status = $request->status;
-        $task->content = $request->content;
-        $task->save();
-
+        if (\Auth::check()){
+            $task->status = $request->status;
+            $task->content = $request->content;
+            $task->save();
+        }else{
+            return redirect('/');
+        }
+        
         // トップページへリダイレクトさせる
         return redirect('/');
     }

@@ -3,7 +3,7 @@
 @section('content')
 @if (Auth::check())
         @if (count($tasks) > 0)
-<table class="table table-striped">
+        <table class="table table-striped">
     <thead>
         <tr>
             <th>id</th>
@@ -19,9 +19,9 @@
             <td>{{ $task->content }}</td>
         </tr>
         @endforeach
-    </tbody>
-</table>
-@endif
+         </tbody>
+        </table>
+        @endif
 {{--メッセージ作成ページへのリンク--}}
         <div class="center">
                 {!! link_to_route('tasks.create','新規タスクの投稿',[],['class' => 'btn btn-lg btn-primary']) !!}
