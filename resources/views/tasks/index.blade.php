@@ -2,6 +2,8 @@
 
 @section('content')
 @if (Auth::check())
+        <h6>{{ $user->name }}さん</h6>
+
         @if (count($tasks) > 0)
         <table class="table table-striped">
     <thead>
@@ -37,9 +39,5 @@
             </div>
         </div>
     @endif
-
-
-
-
 
 @endsection
