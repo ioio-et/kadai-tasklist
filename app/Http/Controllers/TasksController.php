@@ -19,19 +19,16 @@ class TasksController extends Controller
         if (\Auth::check()) { // 認証済みの場合
             // 認証済みユーザを取得
             $user = \Auth::user();
-            // ユーザの投稿の一覧を作成日時の降順で取得
-            // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
-            $tasks = Task::all();
-            //$tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+            // ユーザの投稿を取得
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+            //$tasks = Task::all();
 
             $data = [
                 'user' => $user,
                 'tasks' => $tasks,
             ];
         }
-        
-        
-        // Welcomeビューでそれらを表示
+        // indexビューでそれらを表示
         return view('tasks.index', $data);
 
         /*return view('tasks.index', [
